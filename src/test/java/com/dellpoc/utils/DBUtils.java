@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DBUtils {
-    private static final String URL = "jdbc:oracle:thin:@eiiv-dev46.fa.us6.oraclecloud.com:1521:xe";
-    private static final String USER = "ashwanikumar8@deloitte.com";
+    private static final String URL = "jdbc:oracle:thin:@testservername:1521:xe";
+    private static final String USER = "testusername";
     private static final String PASSWORD = "Welcome@1";
 
     private static Connection connection;
