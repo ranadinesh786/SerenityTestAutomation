@@ -4,34 +4,39 @@ import com.dellpoc.utils.DBUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 
 import java.sql.ResultSet;
-
-import static org.junit.Assert.assertTrue;
+import java.sql.SQLException;
 
 public class DBSteps {
+
     private ResultSet resultSet;
 
-    @Given("I connect to the database")
-    public void connectToDatabase() throws Exception {
-        DBUtils.connectToDatabase();
+    @Given("I connect to the Oracle database with URL {string}, user {string}, and password {string}")
+    public void connectToDB(String url, String user, String password) throws SQLException {
+        DBUtils.connectToDB(url, user, password);
     }
 
     @When("I execute the query {string}")
-    public void executeQuery(String query) throws Exception {
+    public void executeQuery(String query) throws SQLException {
         resultSet = DBUtils.executeQuery(query);
     }
 
-    @Then("the result should contain {string}")
-    public void verifyResult(String expectedValue) throws Exception {
+    @Then("the result should contain a column {string} with value {string}")
+    public void verifyResult(String column, String value) throws SQLException {
         boolean found = false;
         while (resultSet.next()) {
-            if (resultSet.getString(1).equals(expectedValue)) {
+            if (resultSet.getString(column).equals(value)) {
                 found = true;
                 break;
             }
         }
-        assertTrue("Expected value not found in the result set", found);
+        Assert.assertTrue("Expected value not found in the result set", found);
+    }
+
+    @Then("I close the database connection")
+    public void closeConnection() throws SQLException {
         DBUtils.closeConnection();
     }
 }

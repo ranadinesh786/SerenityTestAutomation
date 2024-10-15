@@ -1,6 +1,7 @@
-Feature: API Testing
+Feature: Dummy API Test
 
-  Scenario: Send GET request and verify response
+  @APITest
+  Scenario: Get request to dummy API
     Given I set the base URI to "https://jsonplaceholder.typicode.com"
     When I send a GET request to "/posts/1"
     Then the status code should be 200

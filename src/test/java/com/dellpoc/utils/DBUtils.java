@@ -3,27 +3,23 @@ package com.dellpoc.utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBUtils {
-    private static final String URL = "jdbc:oracle:thin:@testservername:1521:xe";
-    private static final String USER = "testusername";
-    private static final String PASSWORD = "Welcome@1";
 
     private static Connection connection;
 
-    public static void connectToDatabase() throws Exception {
-        // Load Oracle JDBC Driver
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        connection = DriverManager.getConnection(URL, USER, PASSWORD);
+    public static void connectToDB(String url, String user, String password) throws SQLException {
+        connection = DriverManager.getConnection(url, user, password);
     }
 
-    public static ResultSet executeQuery(String query) throws Exception {
+    public static ResultSet executeQuery(String query) throws SQLException {
         Statement statement = connection.createStatement();
         return statement.executeQuery(query);
     }
 
-    public static void closeConnection() throws Exception {
+    public static void closeConnection() throws SQLException {
         if (connection != null && !connection.isClosed()) {
             connection.close();
         }

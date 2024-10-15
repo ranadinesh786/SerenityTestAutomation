@@ -5,10 +5,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-
 import static org.hamcrest.Matchers.equalTo;
 
 public class APISteps {
+
     private Response response;
 
     @Given("I set the base URI to {string}")
