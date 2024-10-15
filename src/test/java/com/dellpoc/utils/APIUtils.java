@@ -6,8 +6,20 @@ import net.serenitybdd.core.Serenity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ApiUtils {
-    private static final Logger log = LoggerFactory.getLogger(ApiUtils.class);
+public class APIUtils {
+    private static final Logger log = LoggerFactory.getLogger(APIUtils.class);
+
+    public static void setBaseURI(String baseURI) {
+        RestAssured.baseURI = baseURI;
+    }
+
+    public static Response sendGetRequest(String endpoint) {
+        return RestAssured.get(endpoint);
+    }
+
+    public static Response sendPostRequest(String endpoint, String body) {
+        return RestAssured.given().body(body).post(endpoint);
+    }
 
     public static Response get(String endpoint) {
         log.info("Performing GET request to: " + endpoint);
