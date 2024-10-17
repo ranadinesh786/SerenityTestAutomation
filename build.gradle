@@ -33,6 +33,13 @@ dependencies {
     implementation 'org.apache.spark:spark-sql_2.12:3.1.2'
     implementation 'org.postgresql:postgresql:42.2.23'
 
+    implementation 'org.apache.commons:commons-csv:1.8'
+    implementation 'org.apache.poi:poi:5.2.3'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+    implementation 'org.apache.pdfbox:pdfbox:2.0.27'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'org.slf4j:slf4j-simple:1.7.36'
+
 }
 
 task cucumberTest(type: Test)
@@ -40,4 +47,5 @@ task cucumberTest(type: Test)
     useJUnitPlatform()
     include '**/*CucumberTest.class'
     systemProperty 'cucumber.options', '--plugin pretty'
+    systemProperty 'env', project.hasProperty('env') ? project.getProperty('env') : 'dev'
 }
